@@ -133,13 +133,13 @@ class ChartCanvas implements common.ChartCanvas {
   }
 
   /// Creates a bottom to top gradient that transitions [fill] to transparent.
-  ui.Gradient _createHintGradient(double left, double top, common.Color fill) {
+  ui.Gradient _createHintGradient(Offset from, Offset to, common.Color fill, common.Color fillStop) {
     return new ui.Gradient.linear(
-      new Offset(left, top),
-      new Offset(left, top - rect_top_gradient_pixels),
+      from,
+      to,
       [
         new Color.fromARGB(fill.a, fill.r, fill.g, fill.b),
-        new Color.fromARGB(fill.a, 255, 0, 0)
+        new Color.fromARGB(fillStop.a, fillStop.r, fillStop.g, fillStop.b)
       ],
     );
   }
@@ -177,10 +177,10 @@ class ChartCanvas implements common.ChartCanvas {
 
         // Apply a gradient to the top [rect_top_gradient_pixels] to transparent
         // if the rectangle is higher than the [drawAreaBounds] top.
-        // if (drawAreaBounds != null && bounds.top < drawAreaBounds.top) {
-          _paint.shader = _createHintGradient(drawAreaBounds.left.toDouble(),
-              drawAreaBounds.top.toDouble(), fill);
-        // }
+        final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+        final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
+        _paint.shader = _createHintGradient(from,
+              to, fill, stroke);
 
         canvas.drawRect(_getRect(fillRectBounds), _paint);
         break;
@@ -192,9 +192,11 @@ class ChartCanvas implements common.ChartCanvas {
       _paint.color = new Color.fromARGB(stroke.a, stroke.r, stroke.g, stroke.b);
       // Set shader to null if no draw area bounds so it can use the color
       // instead.
+      final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+      final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
       _paint.shader = drawAreaBounds != null
-          ? _createHintGradient(drawAreaBounds.left.toDouble(),
-              drawAreaBounds.top.toDouble(), stroke)
+          ? _createHintGradient(from,
+              to, fill, stroke)
           : null;
       _paint.strokeJoin = StrokeJoin.round;
       _paint.strokeWidth = strokeWidthPx;
@@ -378,8 +380,10 @@ class ChartCanvas implements common.ChartCanvas {
 
     // Apply a gradient the background if bounds exceed the draw area.
     if (drawAreaBounds != null && bounds.top < drawAreaBounds.top) {
-      _paint.shader = _createHintGradient(drawAreaBounds.left.toDouble(),
-          drawAreaBounds.top.toDouble(), background);
+      final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+      final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
+      _paint.shader = _createHintGradient(from,
+          to, fill, background);
     }
 
     canvas.drawRect(_getRect(bounds), _paint);
@@ -414,8 +418,10 @@ class ChartCanvas implements common.ChartCanvas {
     // Create gradient for line painter if top bounds exceeded.
     ui.Shader lineShader;
     if (drawAreaBounds != null && bounds.top < drawAreaBounds.top) {
+      final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+      final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
       lineShader = _createHintGradient(
-          drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble(), fill);
+          from, to, fill, background);
     }
 
     for (int i = start; i < end; i = i + offset) {
