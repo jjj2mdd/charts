@@ -177,10 +177,10 @@ class ChartCanvas implements common.ChartCanvas {
 
         // Apply a gradient to the top [rect_top_gradient_pixels] to transparent
         // if the rectangle is higher than the [drawAreaBounds] top.
-        if (drawAreaBounds != null && bounds.top < drawAreaBounds.top) {
+        // if (drawAreaBounds != null && bounds.top < drawAreaBounds.top) {
           _paint.shader = _createHintGradient(drawAreaBounds.left.toDouble(),
               drawAreaBounds.top.toDouble(), fill);
-        }
+        // }
 
         canvas.drawRect(_getRect(fillRectBounds), _paint);
         break;
