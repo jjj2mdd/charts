@@ -144,6 +144,17 @@ class ChartCanvas implements common.ChartCanvas {
     );
   }
 
+  ui.Gradient _createGradient(Offset from, Offset to, common.Color start, common.Color end) {
+    return new ui.Gradient.linear(
+      from,
+      to,
+      [
+        new Color.fromARGB(start.a, start.r, start.g, start.b),
+        new Color.fromARGB(end.a, end.r, end.g, end.b)
+      ],
+    );
+  }
+
   @override
   void drawRect(Rectangle<num> bounds,
       {common.Color fill,
@@ -168,7 +179,18 @@ class ChartCanvas implements common.ChartCanvas {
         _drawForwardHatchPattern(fillRectBounds, canvas,
             fill: fill, drawAreaBounds: drawAreaBounds);
         break;
+      case common.FillPatternType.gradient:
+        _paint.color = new Color.fromARGB(fill.a, fill.r, fill.g, fill.b);
+        _paint.style = PaintingStyle.fill;
+        
+        if (drawAreaBounds != null) {
+          final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+          final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
+          _paint.shader = _createHintGradient(from, to, fill, stroke);
+        }
 
+        canvas.drawRect(_getRect(fillRectBounds), _paint);
+        break;
       case common.FillPatternType.solid:
       default:
         // Use separate rect for drawing stroke
