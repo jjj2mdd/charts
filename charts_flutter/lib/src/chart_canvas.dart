@@ -184,9 +184,9 @@ class ChartCanvas implements common.ChartCanvas {
         _paint.style = PaintingStyle.fill;
         
         if (drawAreaBounds != null) {
-          final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
-          final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
-          _paint.shader = _createGradient(from, to, stroke, fill);
+          final from = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.bottom.toDouble());
+          final to = Offset(drawAreaBounds.left.toDouble(), drawAreaBounds.top.toDouble());
+          _paint.shader = _createGradient(from, to, fill, stroke);
         }
 
         canvas.drawRect(_getRect(fillRectBounds), _paint);
