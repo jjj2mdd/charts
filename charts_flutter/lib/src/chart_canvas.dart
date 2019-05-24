@@ -139,7 +139,7 @@ class ChartCanvas implements common.ChartCanvas {
       new Offset(left, top - rect_top_gradient_pixels),
       [
         new Color.fromARGB(fill.a, fill.r, fill.g, fill.b),
-        new Color.fromARGB(0, fill.r, fill.g, fill.b)
+        new Color.fromARGB(fill.a, 255, 0, 0)
       ],
     );
   }
