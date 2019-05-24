@@ -139,7 +139,7 @@ class ChartCanvas implements common.ChartCanvas {
       to,
       [
         new Color.fromARGB(fill.a, fill.r, fill.g, fill.b),
-        new Color.fromARGB(fillStop.a, fillStop.r, fillStop.g, fillStop.b)
+        fillStop == null ? Color.fromRGBO(255, 0, 0, 1) : new Color.fromARGB(fillStop.a, fillStop.r, fillStop.g, fillStop.b)
       ],
     );
   }
