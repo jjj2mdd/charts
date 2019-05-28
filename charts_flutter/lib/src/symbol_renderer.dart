@@ -97,7 +97,7 @@ class _SymbolCustomPaint extends CustomPainter {
     new Rectangle<num>(0, 0, size.width.toInt(), size.height.toInt());
     final fillColor = new common.Color(
         r: color.red, g: color.green, b: color.blue, a: color.alpha);
-    final strokeColor = new common.Color(
+    final strokeColor = color2 == null ? fillColor : new common.Color(
         r: color2.red, g: color2.green, b: color2.blue, a: color2.alpha);
     symbolRenderer.paint(
         new ChartCanvas(canvas, GraphicsFactory(context)), bounds,
