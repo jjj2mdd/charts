@@ -31,7 +31,7 @@ class SymbolRendererCanvas implements SymbolRendererBuilder {
 
   @override
   Widget build(BuildContext context,
-      {Color color, Size size, bool enabled = true}) {
+      {Color color, Color color2, Size size, bool enabled = true}) {
     if (!enabled) {
       color = color.withOpacity(0.26);
     }
@@ -40,7 +40,7 @@ class SymbolRendererCanvas implements SymbolRendererBuilder {
         size: size,
         child: new CustomPaint(
             painter:
-                new _SymbolCustomPaint(context, commonSymbolRenderer, color)));
+                new _SymbolCustomPaint(context, commonSymbolRenderer, color, color2: color2)));
   }
 }
 
@@ -54,7 +54,7 @@ abstract class CustomSymbolRenderer extends common.SymbolRenderer
   /// Must override this method to build the custom Widget with the given color
   /// as
   @override
-  Widget build(BuildContext context, {Color color, Size size, bool enabled});
+  Widget build(BuildContext context, {Color color, Color color2, Size size, bool enabled});
 
   @override
   void paint(common.ChartCanvas canvas, Rectangle<num> bounds,
@@ -83,18 +83,21 @@ class _SymbolCustomPaint extends CustomPainter {
   final BuildContext context;
   final common.SymbolRenderer symbolRenderer;
   final Color color;
+  final Color color2;
 
-  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color);
+  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color, {this.color2 = color});
 
   @override
   void paint(Canvas canvas, Size size) {
     final bounds =
         new Rectangle<num>(0, 0, size.width.toInt(), size.height.toInt());
-    final commonColor = new common.Color(
+    final fillColor = new common.Color(
         r: color.red, g: color.green, b: color.blue, a: color.alpha);
+    final strokeColor = new common.Color(
+        r: color2.red, g: color2.green, b: color2.blue, a: color2.alpha);
     symbolRenderer.paint(
         new ChartCanvas(canvas, GraphicsFactory(context)), bounds,
-        fillColor: commonColor, strokeColor: commonColor);
+        fillColor: fillColor, strokeColor: strokeColor);
   }
 
   @override
