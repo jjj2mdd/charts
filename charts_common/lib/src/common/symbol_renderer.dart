@@ -17,7 +17,7 @@ import 'dart:math' show Rectangle, Point, min;
 
 import 'package:meta/meta.dart' show protected;
 
-import '../chart/common/chart_canvas.dart' show ChartCanvas;
+import '../chart/common/chart_canvas.dart';
 import 'color.dart' show Color;
 import 'style/style_factory.dart' show StyleFactory;
 
@@ -43,9 +43,9 @@ abstract class SymbolRenderer extends BaseSymbolRenderer {
 
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      Color fillColor,
-      Color strokeColor,
-      double strokeWidthPx});
+        Color fillColor,
+        Color strokeColor,
+        double strokeWidthPx});
 
   @protected
   double getSolidStrokeWidthPx(double strokeWidthPx) {
@@ -85,9 +85,9 @@ class RoundedRectSymbolRenderer extends SymbolRenderer {
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      Color fillColor,
-      Color strokeColor,
-      double strokeWidthPx}) {
+        Color fillColor,
+        Color strokeColor,
+        double strokeWidthPx}) {
     canvas.drawRRect(bounds,
         fill: getSolidFillColor(fillColor),
         stroke: strokeColor,
@@ -140,9 +140,9 @@ class LineSymbolRenderer extends SymbolRenderer {
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      Color fillColor,
-      Color strokeColor,
-      double strokeWidthPx}) {
+        Color fillColor,
+        Color strokeColor,
+        double strokeWidthPx}) {
     final centerHeight = (bounds.bottom - bounds.top) / 2;
 
     // If we have a dash pattern, do not round the end caps, and set
@@ -207,9 +207,9 @@ class CircleSymbolRenderer extends SymbolRenderer {
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      Color fillColor,
-      Color strokeColor,
-      double strokeWidthPx}) {
+        Color fillColor,
+        Color strokeColor,
+        double strokeWidthPx}) {
     final center = new Point(
       bounds.left + (bounds.width / 2),
       bounds.top + (bounds.height / 2),
@@ -242,16 +242,19 @@ class CircleSymbolRenderer extends SymbolRenderer {
 
 /// Rectangle symbol renderer.
 class RectSymbolRenderer extends SymbolRenderer {
-  RectSymbolRenderer({bool isSolid = true}) : super(isSolid: isSolid);
+  RectSymbolRenderer(
+      {bool isSolid = true, FillPatternType pattern = FillPatternType.solid})
+      : super(isSolid: isSolid);
 
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      Color fillColor,
-      Color strokeColor,
-      double strokeWidthPx}) {
+        Color fillColor,
+        Color strokeColor,
+        double strokeWidthPx}) {
     canvas.drawRect(bounds,
         fill: getSolidFillColor(fillColor),
+        pattern: pattern,
         stroke: strokeColor,
         strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx));
   }
