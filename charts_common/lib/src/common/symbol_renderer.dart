@@ -243,8 +243,10 @@ class CircleSymbolRenderer extends SymbolRenderer {
 /// Rectangle symbol renderer.
 class RectSymbolRenderer extends SymbolRenderer {
   RectSymbolRenderer(
-      {bool isSolid = true, FillPatternType pattern = FillPatternType.solid})
+      {this.pattern = FillPatternType.solid, bool isSolid = true})
       : super(isSolid: isSolid);
+
+  final FillPatternType pattern;
 
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
