@@ -40,7 +40,8 @@ class SymbolRendererCanvas implements SymbolRendererBuilder {
         size: size,
         child: new CustomPaint(
             painter:
-                new _SymbolCustomPaint(context, commonSymbolRenderer, color, color2: color2)));
+            new _SymbolCustomPaint(
+                context, commonSymbolRenderer, color, color2)));
   }
 }
 
@@ -54,14 +55,15 @@ abstract class CustomSymbolRenderer extends common.SymbolRenderer
   /// Must override this method to build the custom Widget with the given color
   /// as
   @override
-  Widget build(BuildContext context, {Color color, Color color2, Size size, bool enabled});
+  Widget build(BuildContext context,
+      {Color color, Color color2, Size size, bool enabled});
 
   @override
   void paint(common.ChartCanvas canvas, Rectangle<num> bounds,
       {List<int> dashPattern,
-      common.Color fillColor,
-      common.Color strokeColor,
-      double strokeWidthPx}) {
+        common.Color fillColor,
+        common.Color strokeColor,
+        double strokeWidthPx}) {
     // Intentionally ignored (never called).
   }
 
@@ -74,7 +76,8 @@ abstract class CustomSymbolRenderer extends common.SymbolRenderer
 /// Common interface for [CustomSymbolRenderer] & [SymbolRendererCanvas] for
 /// convenience for [LegendEntryLayout].
 abstract class SymbolRendererBuilder {
-  Widget build(BuildContext context, {Color color, Color color2, Size size, bool enabled});
+  Widget build(BuildContext context,
+      {Color color, Color color2, Size size, bool enabled});
 }
 
 /// The Widget which fulfills the guts of [SymbolRendererCanvas] actually
@@ -85,12 +88,13 @@ class _SymbolCustomPaint extends CustomPainter {
   final Color color;
   final Color color2;
 
-  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color, {this.color2 = color});
+  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color,
+      this.color2);
 
   @override
   void paint(Canvas canvas, Size size) {
     final bounds =
-        new Rectangle<num>(0, 0, size.width.toInt(), size.height.toInt());
+    new Rectangle<num>(0, 0, size.width.toInt(), size.height.toInt());
     final fillColor = new common.Color(
         r: color.red, g: color.green, b: color.blue, a: color.alpha);
     final strokeColor = new common.Color(
