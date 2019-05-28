@@ -38,8 +38,11 @@ class PerSeriesLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
   @override
   List<LegendEntry<D>> getLegendEntries(List<MutableSeries<D>> seriesList) {
     final legendEntries = seriesList
-        .map((series) => new LegendEntry<D>(series, series.displayName,
-            color: series.colorFn(0), textStyle: entryTextStyle))
+        .map((series) =>
+    new LegendEntry<D>(series, series.displayName,
+        color: series.colorFn(0),
+        color2: series.fillColorFn(0),
+        textStyle: entryTextStyle))
         .toList();
 
     // Update with measures only if showing measure on no selection.
@@ -66,8 +69,8 @@ class PerSeriesLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
   }
 
   /// Update legend entries with measures of the selected datum
-  void _updateFromSelection(
-      List<LegendEntry<D>> legendEntries, SelectionModel<D> selectionModel) {
+  void _updateFromSelection(List<LegendEntry<D>> legendEntries,
+      SelectionModel<D> selectionModel) {
     // Map of series ID to the total selected measure value for that series.
     final seriesAndMeasure = <String, num>{};
 
@@ -115,8 +118,8 @@ class PerSeriesLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
   /// This method calculates the legend's measure value to show when there is no
   /// selection. The type of calculation is based on the [legendDefaultMeasure]
   /// value.
-  void _updateFromSeriesList(
-      List<LegendEntry<D>> legendEntries, List<MutableSeries<D>> seriesList) {
+  void _updateFromSeriesList(List<LegendEntry<D>> legendEntries,
+      List<MutableSeries<D>> seriesList) {
     // Helper function to sum up the measure values
     num getMeasureTotal(MutableSeries<D> series) {
       var measureTotal = 0.0;
@@ -149,16 +152,16 @@ class PerSeriesLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
           calculatedMeasure = series.measureFn(series.data.length - 1);
           break;
         case LegendDefaultMeasure.none:
-          // [calculatedMeasure] intentionally left null, since we do not want
-          // to show any measures.
+        // [calculatedMeasure] intentionally left null, since we do not want
+        // to show any measures.
           break;
       }
 
       seriesAndMeasure[seriesId] = calculatedMeasure?.toDouble();
       seriesAndFormattedMeasure[seriesId] =
-          (series.getAttr(measureAxisIdKey) == Axis.secondaryMeasureAxisId)
-              ? secondaryMeasureFormatter(calculatedMeasure)
-              : measureFormatter(calculatedMeasure);
+      (series.getAttr(measureAxisIdKey) == Axis.secondaryMeasureAxisId)
+          ? secondaryMeasureFormatter(calculatedMeasure)
+          : measureFormatter(calculatedMeasure);
     }
 
     for (var entry in legendEntries) {
