@@ -42,6 +42,7 @@ class PerDatumLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
       legendEntries.add(new LegendEntry<D>(
           series, series.domainFn(i).toString(),
           color: series.colorFn(i),
+          color2: series.fillColorFn(i),
           datum: series.data[i],
           datumIndex: i,
           textStyle: entryTextStyle));
@@ -71,8 +72,8 @@ class PerDatumLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
   }
 
   /// Update legend entries with measures of the selected datum
-  void _updateFromSelection(
-      List<LegendEntry<D>> legendEntries, SelectionModel<D> selectionModel) {
+  void _updateFromSelection(List<LegendEntry<D>> legendEntries,
+      SelectionModel<D> selectionModel) {
     // Given that each legend entry only has one datum associated with it, any
     // option for [legendDefaultMeasure] essentially boils down to just showing
     // the measure value.
@@ -102,8 +103,8 @@ class PerDatumLegendEntryGenerator<D> implements LegendEntryGenerator<D> {
   /// This method calculates the legend's measure value to show when there is no
   /// selection. The type of calculation is based on the [legendDefaultMeasure]
   /// value.
-  void _updateFromSeriesList(
-      List<LegendEntry<D>> legendEntries, List<MutableSeries<D>> seriesList) {
+  void _updateFromSeriesList(List<LegendEntry<D>> legendEntries,
+      List<MutableSeries<D>> seriesList) {
     // Given that each legend entry only has one datum associated with it, any
     // option for [legendDefaultMeasure] essentially boils down to just showing
     // the measure value.
