@@ -85,7 +85,7 @@ class _SymbolCustomPaint extends CustomPainter {
   final Color color;
   final Color color2;
 
-  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color, {this.color2 = color},);
+  _SymbolCustomPaint(this.context, this.symbolRenderer, this.color, {this.color2 = color});
 
   @override
   void paint(Canvas canvas, Size size) {
