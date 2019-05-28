@@ -243,10 +243,12 @@ class CircleSymbolRenderer extends SymbolRenderer {
 /// Rectangle symbol renderer.
 class RectSymbolRenderer extends SymbolRenderer {
   RectSymbolRenderer(
-      {this.pattern = FillPatternType.solid, bool isSolid = true})
+      {this.pattern = FillPatternType.solid, this.endColor, bool isSolid = true})
       : super(isSolid: isSolid);
 
   final FillPatternType pattern;
+
+  final Color endColor;
 
   @override
   void paint(ChartCanvas canvas, Rectangle<num> bounds,
@@ -257,7 +259,7 @@ class RectSymbolRenderer extends SymbolRenderer {
     canvas.drawRect(bounds,
         fill: getSolidFillColor(fillColor),
         pattern: pattern,
-        stroke: strokeColor,
+        stroke: endColor,
         strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx));
   }
 
