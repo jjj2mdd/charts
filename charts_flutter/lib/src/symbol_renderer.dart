@@ -74,7 +74,7 @@ abstract class CustomSymbolRenderer extends common.SymbolRenderer
 /// Common interface for [CustomSymbolRenderer] & [SymbolRendererCanvas] for
 /// convenience for [LegendEntryLayout].
 abstract class SymbolRendererBuilder {
-  Widget build(BuildContext context, {Color color, Size size, bool enabled});
+  Widget build(BuildContext context, {Color color, Color color2, Size size, bool enabled});
 }
 
 /// The Widget which fulfills the guts of [SymbolRendererCanvas] actually
