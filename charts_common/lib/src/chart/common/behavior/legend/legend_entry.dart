@@ -30,6 +30,7 @@ class LegendEntry<D> {
   final int datumIndex;
   final D domain;
   final Color color;
+  final Color color2;
   final TextStyleSpec textStyle;
   double value;
   String formattedValue;
@@ -64,22 +65,25 @@ class LegendEntry<D> {
 
   LegendEntry(this.series, this.label,
       {this.datum,
-      this.datumIndex,
-      this.domain,
-      this.value,
-      this.color,
-      this.textStyle,
-      this.isSelected = false,
-      this.rowNumber,
-      this.columnNumber,
-      this.rowCount,
-      this.columnCount,
-      this.inFirstRow,
-      this.inFirstColumn,
-      this.inLastRow,
-      this.inLastColumn});
+        this.datumIndex,
+        this.domain,
+        this.value,
+        this.color,
+        this.color2,
+        this.textStyle,
+        this.isSelected = false,
+        this.rowNumber,
+        this.columnNumber,
+        this.rowCount,
+        this.columnCount,
+        this.inFirstRow,
+        this.inFirstColumn,
+        this.inLastRow,
+        this.inLastColumn});
 
   /// Get the native symbol renderer stored in the series.
   SymbolRenderer get symbolRenderer =>
-      series.getAttr(rendererKey).symbolRenderer;
+      series
+          .getAttr(rendererKey)
+          .symbolRenderer;
 }
