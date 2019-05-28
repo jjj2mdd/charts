@@ -52,14 +52,13 @@ abstract class ChartCanvas {
   /// to stroke-dasharray in SVG path elements. An odd number of values in the
   /// pattern will be repeated to derive an even number of values. "1,2,3" is
   /// equivalent to "1,2,3,1,2,3."
-  void drawLine(
-      {List<Point> points,
-      Rectangle<num> clipBounds,
-      Color fill,
-      Color stroke,
-      bool roundEndCaps,
-      double strokeWidthPx,
-      List<int> dashPattern});
+  void drawLine({List<Point> points,
+    Rectangle<num> clipBounds,
+    Color fill,
+    Color stroke,
+    bool roundEndCaps,
+    double strokeWidthPx,
+    List<int> dashPattern});
 
   /// Renders a pie, with an optional hole in the center.
   void drawPie(CanvasPie canvasPie);
@@ -75,12 +74,11 @@ abstract class ChartCanvas {
   /// [stroke] and [strokeWidthPx] configure the color and thickness of the
   /// outer edge of the point. Both must be provided together for a line to
   /// appear.
-  void drawPoint(
-      {Point point,
-      double radius,
-      Color fill,
-      Color stroke,
-      double strokeWidthPx});
+  void drawPoint({Point point,
+    double radius,
+    Color fill,
+    Color stroke,
+    double strokeWidthPx});
 
   /// Renders a polygon shape described by a set of points.
   ///
@@ -92,12 +90,11 @@ abstract class ChartCanvas {
   ///
   /// [stroke] and [strokeWidthPx] configure the color and thickness of the
   /// edges of the polygon. Both must be provided together for a line to appear.
-  void drawPolygon(
-      {List<Point> points,
-      Rectangle<num> clipBounds,
-      Color fill,
-      Color stroke,
-      double strokeWidthPx});
+  void drawPolygon({List<Point> points,
+    Rectangle<num> clipBounds,
+    Color fill,
+    Color stroke,
+    double strokeWidthPx});
 
   /// Renders a simple rectangle.
   ///
@@ -107,19 +104,20 @@ abstract class ChartCanvas {
   /// with anything exceeding the x pixels to be transparent.
   void drawRect(Rectangle<num> bounds,
       {Color fill,
-      Color stroke,
-      double strokeWidthPx,
-      Rectangle<num> drawAreaBounds});
+        Color stroke,
+        FillPatternType pattern,
+        double strokeWidthPx,
+        Rectangle<num> drawAreaBounds});
 
   /// Renders a rounded rectangle.
   void drawRRect(Rectangle<num> bounds,
       {Color fill,
-      Color stroke,
-      num radius,
-      bool roundTopLeft,
-      bool roundTopRight,
-      bool roundBottomLeft,
-      bool roundBottomRight});
+        Color stroke,
+        num radius,
+        bool roundTopLeft,
+        bool roundTopRight,
+        bool roundBottomLeft,
+        bool roundBottomRight});
 
   /// Renders a stack of bars, rounding the last bar in the stack.
   ///
