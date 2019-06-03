@@ -18,6 +18,15 @@ import '../processed_series.dart' show MutableSeries;
 import '../selection_model/selection_model.dart'
     show SelectionModel, SelectionModelType;
 import 'chart_behavior.dart' show ChartBehavior;
+import '../../../common/graphics_factory.dart' show GraphicsFactory;
+import '../../layout/layout_view.dart'
+    show
+    LayoutPosition,
+    LayoutView,
+    LayoutViewConfig,
+    LayoutViewPaintOrder,
+    ViewMeasuredSizes;
+import '../chart_canvas.dart' show ChartCanvas, getAnimatedColor;
 
 /// Chart behavior that monitors the specified [SelectionModel] and darkens the
 /// color for selected data.
@@ -37,7 +46,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-        new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
+    new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
@@ -46,7 +55,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   void _showMarkerFunctions(List<MutableSeries<D>> seriesList) {
     SelectionModel selectionModel =
-        _chart.getSelectionModel(selectionModelType);
+    _chart.getSelectionModel(selectionModelType);
     final _datum = selectionModel.selectedDatum;
     final _index = _datum.first.index;
     final _values = List<String>();
