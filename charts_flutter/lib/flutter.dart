@@ -163,6 +163,7 @@ export 'src/behaviors/a11y/domain_a11y_explore_behavior.dart'
     show DomainA11yExploreBehavior;
 export 'src/behaviors/chart_behavior.dart' show ChartBehavior;
 export 'src/behaviors/domain_highlighter.dart' show DomainHighlighter;
+export 'src/behaviors/marker_highlighter.dart' show MarkerHighlighter;
 export 'src/behaviors/initial_selection.dart' show InitialSelection;
 export 'src/behaviors/calculation/percent_injector.dart' show PercentInjector;
 export 'src/behaviors/chart_title/chart_title.dart' show ChartTitle;
