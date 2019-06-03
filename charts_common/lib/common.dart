@@ -116,6 +116,8 @@ export 'src/chart/common/behavior/calculation/percent_injector.dart'
     show PercentInjector, PercentInjectorTotalType;
 export 'src/chart/common/behavior/domain_highlighter.dart'
     show DomainHighlighter;
+export 'src/chart/common/behavior/marker_highlighter.dart'
+    show MarkerHighlighter;
 export 'src/chart/common/behavior/initial_selection.dart' show InitialSelection;
 export 'src/chart/common/behavior/legend/legend.dart'
     show Legend, LegendCellPadding, LegendState, LegendTapHandling;
