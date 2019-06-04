@@ -15,14 +15,16 @@
 
 import 'dart:math' show max, min, Point, Rectangle;
 
+import 'package:meta/meta.dart';
+
 import '../../../common/graphics_factory.dart' show GraphicsFactory;
 import '../../layout/layout_view.dart'
     show
-        LayoutPosition,
-        LayoutView,
-        LayoutViewConfig,
-        LayoutViewPaintOrder,
-        ViewMeasuredSizes;
+    LayoutPosition,
+    LayoutView,
+    LayoutViewConfig,
+    LayoutViewPaintOrder,
+    ViewMeasuredSizes;
 import '../base_chart.dart' show BaseChart, LifecycleListener;
 import '../chart_canvas.dart' show ChartCanvas, getAnimatedColor;
 import '../processed_series.dart' show MutableSeries;
@@ -48,7 +50,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-        new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
+    new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
@@ -57,7 +59,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   void _showMarkerFunctions(List<MutableSeries<D>> seriesList) {
     SelectionModel selectionModel =
-        _chart.getSelectionModel(selectionModelType);
+    _chart.getSelectionModel(selectionModelType);
     final _datum = selectionModel.selectedDatum;
     final _index = _datum.first.index;
     final _keys = List<String>();
@@ -125,9 +127,9 @@ class _MarkerLayoutView<D> extends LayoutView {
   _MarkerLayoutView({
     @required int layoutPaintOrder,
   }) : this.layoutConfig = new LayoutViewConfig(
-            paintOrder: LayoutViewPaintOrder.linePointHighlighter,
-            position: LayoutPosition.DrawArea,
-            positionOrder: layoutPaintOrder);
+      paintOrder: LayoutViewPaintOrder.linePointHighlighter,
+      position: LayoutPosition.DrawArea,
+      positionOrder: layoutPaintOrder);
 
   @override
   GraphicsFactory get graphicsFactory => _graphicsFactory;
