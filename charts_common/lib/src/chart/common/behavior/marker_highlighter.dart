@@ -61,7 +61,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
 
-    if (selectionModel.hasAnySelection) {
+    if (selectionModel.hasDatumSelection) {
       final _datum = selectionModel.selectedDatum;
       final _index = _datum.first.index;
       final _values = List<String>();
