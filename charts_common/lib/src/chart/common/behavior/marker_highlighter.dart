@@ -50,14 +50,14 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-    new LifecycleListener<D>(onAxisConfigured: _drawMarkerFunctions);
+    new LifecycleListener<D>(onPostrender: _drawMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
     _chart.redraw(skipLayout: true, skipAnimation: true);
   }
 
-  void _drawMarkerFunctions() {
+  void _drawMarkerFunctions(ChartCanvas canvas) {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
 
