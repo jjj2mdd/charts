@@ -119,7 +119,9 @@ class _MarkerLayoutView<D> extends LayoutView {
 
   GraphicsFactory _graphicsFactory;
 
-  _MarkerLayoutView() : this.layoutConfig = new LayoutViewConfig(
+  _MarkerLayoutView({
+    @required int layoutPaintOrder,
+  }) : this.layoutConfig = new LayoutViewConfig(
       paintOrder: LayoutViewPaintOrder.linePointHighlighter,
       position: LayoutPosition.DrawArea,
       positionOrder: layoutPaintOrder);
