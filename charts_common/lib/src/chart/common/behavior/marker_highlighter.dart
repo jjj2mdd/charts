@@ -61,18 +61,15 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
 
-    if (selectionModel.hasDatumSelection) {
+    if (selectionModel.hasAnySelection) {
       final _datum = selectionModel.selectedDatum;
       final _index = _datum.first.index;
-      final _keys = List<String>();
-      final _values = List();
+      final _values = List<String>();
 
       seriesList.forEach((MutableSeries<D> series) {
-        _keys.add(series.displayName);
-        _values.add(series.data[_index]);
+        _values.add('${series.displayName}:${series.data[_index]}');
       });
 
-      print(_keys);
       print(_values);
     }
   }
