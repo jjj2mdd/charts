@@ -50,24 +50,23 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-    new LifecycleListener<D>(onAxisConfigured: _setupMarkerFunctions);
+    new LifecycleListener<D>(onPostprocess: _setupMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
     _chart.redraw(skipLayout: true, skipAnimation: true);
   }
 
-  void _setupMarkerFunctions() {
+  void _setupMarkerFunctions(List<MutableSeries<D>> seriesList) {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
 
     if (selectionModel.hasDatumSelection) {
-      final _datum = selectionModel.selectedDatum;
-      final _index = _datum.first.index;
+      final _index = selectionModel.selectedDatum.first.index;
       final _values = List<String>();
 
-      _datum.forEach((datum) {
-        _values.add('${datum.series.displayName}:${datum.series.data[_index]}');
+      seriesList.forEach((series) {
+        _values.add('${series.displayName}:${series.data[_index]}');
       });
 
       _view.values = _values;
