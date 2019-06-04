@@ -50,14 +50,14 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-    new LifecycleListener<D>(onPostrender: _drawMarkerFunctions);
+    new LifecycleListener<D>(onAxisConfigured: _setupMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
     _chart.redraw(skipLayout: true, skipAnimation: true);
   }
 
-  void _drawMarkerFunctions(ChartCanvas canvas) {
+  void _setupMarkerFunctions() {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
 
@@ -70,7 +70,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
         _values.add('${datum.series.displayName}:${datum.series.data[_index]}');
       });
 
-      print(_values);
+      _view.values = _values;
     }
   }
 
@@ -111,6 +111,8 @@ class _MarkerLayoutView<D> extends LayoutView {
 
   GraphicsFactory _graphicsFactory;
 
+  List<String> values;
+
   _MarkerLayoutView({
     @required int layoutPaintOrder,
   }) : this.layoutConfig = new LayoutViewConfig(
@@ -137,7 +139,10 @@ class _MarkerLayoutView<D> extends LayoutView {
   }
 
   @override
-  void paint(ChartCanvas canvas, double animationPercent) {}
+  void paint(ChartCanvas canvas, double animationPercent) {
+    // canvas.drawText(textElement, offsetX, offsetY);
+    print(values.join('\n'));
+  }
 
   @override
   Rectangle<int> get componentBounds => this._drawAreaBounds;
