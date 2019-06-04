@@ -60,9 +60,13 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
   void _showMarkerFunctions(List<MutableSeries<D>> seriesList) {
     SelectionModel selectionModel =
     _chart.getSelectionModel(selectionModelType);
-    seriesList.forEach((MutableSeries<D> series) {
-      print(series);
-    });
+    final _index = selectionModel.selectedDatum.first.index;
+    
+    if (_index != null) {
+      seriesList.forEach((MutableSeries<D> series) {
+        print(series);
+      });
+    }
   }
 
   @override
