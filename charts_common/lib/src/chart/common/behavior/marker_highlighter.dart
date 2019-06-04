@@ -14,11 +14,7 @@
 // limitations under the License.
 
 import 'dart:math' show max, min, Point, Rectangle;
-import '../base_chart.dart' show BaseChart, LifecycleListener;
-import '../processed_series.dart' show MutableSeries;
-import '../selection_model/selection_model.dart'
-    show SelectionModel, SelectionModelType;
-import 'chart_behavior.dart' show ChartBehavior;
+
 import '../../../common/graphics_factory.dart' show GraphicsFactory;
 import '../../layout/layout_view.dart'
     show
@@ -27,7 +23,12 @@ import '../../layout/layout_view.dart'
         LayoutViewConfig,
         LayoutViewPaintOrder,
         ViewMeasuredSizes;
+import '../base_chart.dart' show BaseChart, LifecycleListener;
 import '../chart_canvas.dart' show ChartCanvas, getAnimatedColor;
+import '../processed_series.dart' show MutableSeries;
+import '../selection_model/selection_model.dart'
+    show SelectionModel, SelectionModelType;
+import 'chart_behavior.dart' show ChartBehavior;
 
 /// Chart behavior that monitors the specified [SelectionModel] and darkens the
 /// color for selected data.
@@ -87,7 +88,9 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
   @override
   void attachTo(BaseChart<D> chart) {
     _chart = chart;
-    _view = _MarkerLayoutView<D>();
+    _view = _MarkerLayoutView<D>(
+      layoutPaintOrder: LayoutViewPaintOrder.linePointHighlighter,
+    );
 
     chart.addView(_view);
 
