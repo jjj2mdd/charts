@@ -140,8 +140,10 @@ class _MarkerLayoutView<D> extends LayoutView {
 
   @override
   void paint(ChartCanvas canvas, double animationPercent) {
-    // canvas.drawText(textElement, offsetX, offsetY);
-    print(values.join('\n'));
+    if (values != null && values.length > 0) {
+      // canvas.drawText(textElement, offsetX, offsetY);
+      print(values.join('\n'));
+    }
   }
 
   @override
