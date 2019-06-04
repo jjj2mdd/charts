@@ -111,11 +111,18 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
 class _MarkerLayoutView<D> extends LayoutView {
 
+  final LayoutViewConfig layoutConfig;
+
   Rectangle<int> _drawAreaBounds;
 
   Rectangle<int> get drawBounds => _drawAreaBounds;
 
   GraphicsFactory _graphicsFactory;
+
+  _MarkerLayoutView() : this.layoutConfig = new LayoutViewConfig(
+      paintOrder: LayoutViewPaintOrder.linePointHighlighter,
+      position: LayoutPosition.DrawArea,
+      positionOrder: layoutPaintOrder);
 
   @override
   GraphicsFactory get graphicsFactory => _graphicsFactory;
