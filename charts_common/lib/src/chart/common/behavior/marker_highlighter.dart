@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:math' show max, min, Point, Rectangle;
 import '../base_chart.dart' show BaseChart, LifecycleListener;
 import '../processed_series.dart' show MutableSeries;
 import '../selection_model/selection_model.dart'
@@ -21,11 +22,11 @@ import 'chart_behavior.dart' show ChartBehavior;
 import '../../../common/graphics_factory.dart' show GraphicsFactory;
 import '../../layout/layout_view.dart'
     show
-    LayoutPosition,
-    LayoutView,
-    LayoutViewConfig,
-    LayoutViewPaintOrder,
-    ViewMeasuredSizes;
+        LayoutPosition,
+        LayoutView,
+        LayoutViewConfig,
+        LayoutViewPaintOrder,
+        ViewMeasuredSizes;
 import '../chart_canvas.dart' show ChartCanvas, getAnimatedColor;
 
 /// Chart behavior that monitors the specified [SelectionModel] and darkens the
@@ -46,7 +47,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   MarkerHighlighter([this.selectionModelType = SelectionModelType.info]) {
     _lifecycleListener =
-    new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
+        new LifecycleListener<D>(onPostprocess: _showMarkerFunctions);
   }
 
   void _selectionChanged(SelectionModel selectionModel) {
@@ -55,7 +56,7 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 
   void _showMarkerFunctions(List<MutableSeries<D>> seriesList) {
     SelectionModel selectionModel =
-    _chart.getSelectionModel(selectionModelType);
+        _chart.getSelectionModel(selectionModelType);
     final _datum = selectionModel.selectedDatum;
     final _index = _datum.first.index;
     final _keys = List<String>();
@@ -110,7 +111,6 @@ class MarkerHighlighter<D> implements ChartBehavior<D> {
 }
 
 class _MarkerLayoutView<D> extends LayoutView {
-
   final LayoutViewConfig layoutConfig;
 
   Rectangle<int> _drawAreaBounds;
@@ -122,9 +122,9 @@ class _MarkerLayoutView<D> extends LayoutView {
   _MarkerLayoutView({
     @required int layoutPaintOrder,
   }) : this.layoutConfig = new LayoutViewConfig(
-      paintOrder: LayoutViewPaintOrder.linePointHighlighter,
-      position: LayoutPosition.DrawArea,
-      positionOrder: layoutPaintOrder);
+            paintOrder: LayoutViewPaintOrder.linePointHighlighter,
+            position: LayoutPosition.DrawArea,
+            positionOrder: layoutPaintOrder);
 
   @override
   GraphicsFactory get graphicsFactory => _graphicsFactory;
@@ -145,9 +145,7 @@ class _MarkerLayoutView<D> extends LayoutView {
   }
 
   @override
-  void paint(ChartCanvas canvas, double animationPercent) {
-
-  }
+  void paint(ChartCanvas canvas, double animationPercent) {}
 
   @override
   Rectangle<int> get componentBounds => this._drawAreaBounds;
